@@ -1,0 +1,3 @@
+rootProject.name = 'flirterreact'
+
+include ':app'
