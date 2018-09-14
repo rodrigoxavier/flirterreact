@@ -10,10 +10,9 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: 'Texto IOS',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    'Texto Android',
 });
 
 type Props = {};
@@ -21,8 +20,8 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native! Login</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.welcome}>Meu Texto aqui</Text>
+        <Text style={styles.instructions}>Com minhas personalizações aqui</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: 'red',
     marginBottom: 5,
   },
 });
