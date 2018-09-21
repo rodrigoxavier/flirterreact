@@ -7,7 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, Alert} from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -27,6 +28,23 @@ export default class App extends Component<Props> {
       </View>
     );
   }
+
+  registerUser (email, password, name) {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((currentUser) => {
+      firebase.database().ref("Users/"+currentUser.uid).update({
+        uid: currentUser.uid,
+        email: currentUser.email,
+        name: name
+      });
+      Alert.alert("Sucesso!", "Usuário criado");
+      Actions.pop();
+    })
+    .catch((error) => { 
+      console.log("firebase error: " + error.code);
+    });
+  }
+
 }
 
 const styles = StyleSheet.create({
