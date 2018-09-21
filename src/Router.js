@@ -9,7 +9,7 @@ import { Scene, Router, Actions, ActionConst } from 'react-native-router-flux'
 import Login from './containers/AuthContainer/Login'
 import Signup from './containers/AuthContainer/Signup'
 import Dashboard from './containers/MainContainer/Dashboard'
-import BarDetails from './containers/MainContainer/BarDetails'
+import BarDetails from './containers/MainContainer/PlaceDetails'
 
 class RouterComponent extends Component {
   constructor (props) {
