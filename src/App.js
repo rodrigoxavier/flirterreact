@@ -30,7 +30,7 @@ class App extends Component {
         storageBucket: "aulareact-f3277.appspot.com",
         messagingSenderId: "674457894840"
       })
-    }*/ss
+    }*/
   }
 
   render() {
