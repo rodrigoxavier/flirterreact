@@ -4,7 +4,7 @@ import {
   StatusBar,
 } from 'react-native'
 
-import { Scene, Router, Actions, ActionConst } from 'react-native-router-flux'
+import { Scene, Router } from 'react-native-router-flux';
 
 import Login from './containers/AuthContainer/Login'
 import Signup from './containers/AuthContainer/Signup'
@@ -18,17 +18,9 @@ class RouterComponent extends Component {
   }
 
   render () {
-    const {container, sceneStyle, navigationBarStyle, titleStyle, tabBarStyle} = styles;
     return (
-      <View style={[container]}>
-        <StatusBar
-          backgroundColor='black'
-          translucent
-          barStyle='light-content'/>
-        <Router
-          sceneStyle={sceneStyle}
-          navigationBarStyle={navigationBarStyle}
-          titleStyle={titleStyle}>
+      <View style={styles.container}>
+        <Router>
           <Scene key='app'>
             <Scene key='auth' initial hideNavBar>
               <Scene key='login'
