@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-import firebase from 'firebase';
+//import firebase from 'firebase';
 
 import Router from './Router';
 
@@ -21,7 +21,7 @@ console.disableYellowBox = true;
 class App extends Component {
   componentWillMount () {
     //Posso Fazer qualquer tipo de configuração global aqui como por exemplo o Firebase
-    if (firebase.apps.length === 0) {
+    /*if (firebase.apps.length === 0) {
       firebase.initializeApp({
         apiKey: "AIzaSyDMQfC7QQArHtedDhUmQtaF-MHy5usQPjI",
         authDomain: "aulareact-f3277.firebaseapp.com",
@@ -30,7 +30,7 @@ class App extends Component {
         storageBucket: "aulareact-f3277.appspot.com",
         messagingSenderId: "674457894840"
       })
-    }
+    }*/ss
   }
 
   render() {
