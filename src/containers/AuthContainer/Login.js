@@ -8,24 +8,17 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TouchableOpacity, Alert, TextInput, Dimensions} from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 var {height, width} = Dimensions.get('window');
 
-import { Actions } from 'react-native-router-flux';
-
-const instructions = Platform.select({
-  ios: 'Texto IOS',
-  android:
-    'Texto Android',
-});
-
 type Props = {};
-export default class App extends Component<Props> {
+export default class Login extends Component<Props> {
 
   constructor(props) {
     super(props);
     this.state = {
-      text: "Lalalala",
+      text: "Meu Texto Aqui",
       deviceWidth: width,
       deviceHeight: height
     };
@@ -35,29 +28,40 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <TextInput
-          style={{height: this.state.deviceHeight * 0.2, width: this.state.deviceWidth * 0.9, borderBottomColor: 'gray', borderBottomWidth: 1}}
+          style={styles.inputStyle}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
         />
+        <TouchableOpacity onPress={()=> this.openAskAlert()} style={styles.askButton} >
+          <Text style={styles.buttonText}>Abrir alert</Text>
+        </TouchableOpacity>
+        
       </View>
     );
   }
 
-  openSignUp(){
-    Actions.signup();
-    //Alert.alert("Oba!!", "Vou abrir a tela");
-    /*Alert.alert(
-      'Alert Title',
-      'My Alert Msg',
+  openAskAlert(){
+    Alert.alert(
+      'Título do Alerta',
+      'Você quer mesmo confirmar?',
       [
-        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
+        {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => 
+          //this.openSimpleAlert()
+          this.openTestContainer()
+        },
       ],
       { cancelable: false }
-    )*/
+    )
   }
 
+  openSimpleAlert(){
+    Alert.alert("Olá", "Alerta simples");
+  }
+
+  openTestContainer(){
+    Actions.testContainer();
+  }
 }
 
 const styles = StyleSheet.create({
@@ -66,6 +70,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  inputStyle:
+    {height: height * 0.1, 
+      width: width * 0.9, 
+      borderBottomColor: 'gray', 
+      borderBottomWidth: 1
   },
   mainButton:{
     backgroundColor: "#4f8942",
@@ -84,4 +94,13 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 5,
   },
+  askButton: {
+    backgroundColor: "gray",
+    borderRadius: 10,
+    padding: 10,
+    margin: 20
+  },
+  buttonText:{
+    color: "white"
+  }
 });
