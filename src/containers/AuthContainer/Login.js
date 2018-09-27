@@ -32,8 +32,8 @@ export default class Login extends Component<Props> {
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
         />
-        <TouchableOpacity onPress={()=> this.openAskAlert()} style={styles.askButton} >
-          <Text style={styles.buttonText}>Abrir alert</Text>
+        <TouchableOpacity onPress={()=> this.openSignup()} style={styles.askButton} >
+          <Text style={styles.buttonText}>Cadastro</Text>
         </TouchableOpacity>
         
       </View>
@@ -47,8 +47,7 @@ export default class Login extends Component<Props> {
       [
         {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'OK', onPress: () => 
-          //this.openSimpleAlert()
-          this.openTestContainer()
+          this.openSimpleAlert()
         },
       ],
       { cancelable: false }
@@ -56,11 +55,11 @@ export default class Login extends Component<Props> {
   }
 
   openSimpleAlert(){
-    Alert.alert("Olá", "Alerta simples");
+    Alert.alert("Olá", "Você confirmou");
   }
 
-  openTestContainer(){
-    Actions.testContainer();
+  openSignup(){
+    Actions.signup();
   }
 }
 
