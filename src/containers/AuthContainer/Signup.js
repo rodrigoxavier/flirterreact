@@ -39,10 +39,11 @@ export default class SignUp extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Cadastro de Usuário</Text>
         <TouchableOpacity onPress={()=> this.backToLogin()} style={styles.backButton} >
           <Text style={styles.buttonText}>Voltar para login</Text>
         </TouchableOpacity>
+
+        <Text style={styles.titleText}>Cadastro de Usuário</Text>
 
         <TextInput
           style={styles.inputStyle}
@@ -152,7 +153,8 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     borderRadius: 10,
     padding: 10,
-    margin: 20
+    margin: 20,
+    alignSelf: "flex-start"
   },
   registerButton: {
     backgroundColor: "green",
@@ -171,5 +173,11 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gray', 
     borderBottomWidth: 1,
     margin: width * 0.04
+  },
+  titleText:{
+    fontSize: 30,
+    alignItems: 'center',
+    textAlign: 'center',
+    color: "#039BE5"
   }
 });

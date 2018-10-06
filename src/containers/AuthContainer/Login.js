@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Alert, TextInput, Dimensions} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Alert, Image, Dimensions} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 var {height, width} = Dimensions.get('window');
@@ -26,7 +26,8 @@ export default class Login extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcomeText}>Bem vindo</Text>
+        <Image style={styles.logoStyle} source={require('../../Images/logo.png')}/>
+        <Text style={styles.titleText}>Flirter</Text>
         <TouchableOpacity onPress={()=> this.openSignup()} style={styles.askButton} >
           <Text style={styles.buttonText}>Cadastro</Text>
         </TouchableOpacity>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   askButton: {
-    backgroundColor: "blue",
+    backgroundColor: "#039BE5",
     borderRadius: 10,
     padding: 10,
     margin: 20,
@@ -97,5 +98,15 @@ const styles = StyleSheet.create({
     fontSize: 38,
     alignItems: "center",
     textAlign: 'center'
+  },
+  logoStyle: {
+    width: width * 0.55,
+    height: width * 0.55
+  },
+  titleText:{
+    fontSize: 30,
+    alignItems: 'center',
+    textAlign: 'center',
+    color: "#039BE5"
   }
 });
