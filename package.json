@@ -7,6 +7,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "firebase": "^5.5.2",
+    "lodash": "^4.17.11",
     "react": "16.5.0",
     "react-native": "0.57.0",
     "react-native-router-flux": "^4.0.1"

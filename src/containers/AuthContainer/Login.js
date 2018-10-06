@@ -18,7 +18,6 @@ export default class Login extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      text: "Meu Texto Aqui",
       deviceWidth: width,
       deviceHeight: height
     };
@@ -27,15 +26,10 @@ export default class Login extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.inputStyle}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-        />
+        <Text style={styles.welcomeText}>Bem vindo</Text>
         <TouchableOpacity onPress={()=> this.openSignup()} style={styles.askButton} >
           <Text style={styles.buttonText}>Cadastro</Text>
         </TouchableOpacity>
-        
       </View>
     );
   }
@@ -70,12 +64,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  inputStyle:
-    {height: height * 0.1, 
-      width: width * 0.9, 
-      borderBottomColor: 'gray', 
-      borderBottomWidth: 1
-  },
   mainButton:{
     backgroundColor: "#4f8942",
   },
@@ -94,12 +82,20 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   askButton: {
-    backgroundColor: "gray",
+    backgroundColor: "blue",
     borderRadius: 10,
     padding: 10,
-    margin: 20
+    margin: 20,
+    width: width * 0.8,
+    alignItems: 'center'
   },
   buttonText:{
     color: "white"
+  },
+  welcomeText: {
+    color: "gray",
+    fontSize: 38,
+    alignItems: "center",
+    textAlign: 'center'
   }
 });
