@@ -9,6 +9,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Alert, Dimensions, TouchableOpacity, TextInput} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import firebase from "firebase"
+
 var {height, width} = Dimensions.get('window');
 
 const instructions = Platform.select({
@@ -117,9 +119,12 @@ export default class SignUp extends Component<Props> {
       idade: this.state.idade
     }
       firebase.database().ref("Users/").push(userData)
-      .then(snapshot, () => {
+      .then((snapshot) => {
         Alert.alert("Sucesso!", "Usuário criado");
         Actions.pop();
+      })
+      .catch((error) =>{
+        console.log("Error: ", error);
       })
       
   }
