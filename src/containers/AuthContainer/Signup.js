@@ -29,7 +29,7 @@ export default class SignUp extends Component<Props> {
       deviceWidth: width,
       deviceHeight: height,
       nome: "",
-      email: "",
+      email: "rodrigo@beestart.com.br",
       senha: "",
       cidade: "Cidade aqui",
       telefone: "Telefone aqui",
@@ -143,9 +143,10 @@ export default class SignUp extends Component<Props> {
       email: this.state.email,
       cidade: this.state.cidade,
       telefone: this.state.telefone,
-      idade: this.state.idade
+      idade: this.state.idade,
+      altura: 170,
     }
-      firebase.database().ref("Users/").push(userData)
+      firebase.database().ref("Shops/").push(userData)
       .then((snapshot) => {
         Alert.alert("Sucesso!", "Usuário criado");
         Actions.pop();

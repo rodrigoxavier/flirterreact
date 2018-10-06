@@ -30,9 +30,19 @@ export default class Login extends Component<Props> {
         <Text style={styles.titleText}>Flirter</Text>
         <TouchableOpacity onPress={()=> this.openSignup()} style={styles.askButton} >
           <Text style={styles.buttonText}>Cadastro</Text>
-        </TouchableOpacity>
+    </TouchableOpacity>
       </View>
     );
+  }
+
+  textoCondicional(condicao){
+    if (condicao == "maior de minas"){
+      Alert.alert("Atenção", "Cruzeirão Cabuloso");
+    }
+    else {
+      Alert.alert("Atenção", "Não tem bi");
+    }
+    
   }
 
   openAskAlert(){
@@ -108,5 +118,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     color: "#039BE5"
+  },
+  meuBotao:{
+    backgroundColor: 'green',
+    width: width * 0.8,
+    height: width * 0.1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10
+  },
+  estiloTexto:{
+    color: '#ffffff',
+    textAlign: 'center',
+    alignItems: 'center'
   }
 });
