@@ -28,12 +28,21 @@ export default class SignUp extends Component<Props> {
     this.state = {
       deviceWidth: width,
       deviceHeight: height,
-      nome: "Nome aqui",
-      email: "E-mail aqui",
+      nome: "",
+      email: "",
+      senha: "",
       cidade: "Cidade aqui",
       telefone: "Telefone aqui",
       idade: "Idade aqui"
     };
+  }
+
+  componentDidMount(){
+    const { currentUser } = firebase.auth();
+    if (currentUser){
+      console.log("Estou logado: ", currentUser.uid)
+    }
+    //Buscar os dados do usuário logado no banco (depois de ter aprendido a fazer push no banco e criar auth)
   }
 
   render() {
@@ -48,26 +57,38 @@ export default class SignUp extends Component<Props> {
         <TextInput
           style={styles.inputStyle}
           onChangeText={(text) => this.setState({nome: text})}
+          placeholder="Ex: João Silva"
           value={this.state.nome}
         />
         <TextInput
           style={styles.inputStyle}
           onChangeText={(text) => this.setState({email: text})}
+          placeholder="Ex: fulano@gmail.com"
           value={this.state.email}
         />
         <TextInput
           style={styles.inputStyle}
+          onChangeText={(text) => this.setState({senha: text})}
+          placeholder="Senha aqui"
+          secureTextEntry
+          value={this.state.senha}
+        />
+        <TextInput
+          style={styles.inputStyle}
           onChangeText={(text) => this.setState({cidade: text})}
+          placeholder="Ex: Belo Horizonte"
           value={this.state.cidade}
         />
         <TextInput
           style={styles.inputStyle}
           onChangeText={(text) => this.setState({telefone: text})}
+          placeholder="Ex: (31) 99999=9999"
           value={this.state.telefone}
         />
         <TextInput
           style={styles.inputStyle}
           onChangeText={(text) => this.setState({idade: text})}
+          placeholder="Ex: 19 anos"
           value={this.state.idade}
         />
         <TouchableOpacity onPress={()=> this.askRegister()} style={styles.registerButton} >
@@ -89,25 +110,30 @@ export default class SignUp extends Component<Props> {
         {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'OK', onPress: () => 
           this.confirmRegister()
+          //this.registerUser(this.state.email, this.state.senha, this.state.nome, this.state.cidade, this.state.telefone, this.state.idade)
         },
       ],
       { cancelable: false }
     )
   }
 
-  registerUser (email, password, name) {
+  registerUser (email, password, nome, cidade, telefone, idade) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((currentUser) => {
-      firebase.database().ref("Users/"+currentUser.uid).update({
-        uid: currentUser.uid,
-        email: currentUser.email,
-        name: name
+      firebase.database().ref("Users/"+currentUser.user.uid).update({
+        uid: currentUser.user.uid,
+        email: email,
+        nome: nome,
+        cidade: cidade,
+        telefone: telefone,
+        idade: idade
       });
       Alert.alert("Sucesso!", "Usuário criado");
       Actions.pop();
     })
     .catch((error) => { 
-      console.log("firebase error: " + error.code);
+      console.log("firebase error: " + error);
+      Alert.alert("Errou no auth!", error.code)
     });
   }
 
@@ -126,6 +152,7 @@ export default class SignUp extends Component<Props> {
       })
       .catch((error) =>{
         console.log("Error: ", error);
+        Alert.alert("Errou na persistência!", error.code)
       })
       
   }
