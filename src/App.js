@@ -23,12 +23,12 @@ class App extends Component {
     //Posso Fazer qualquer tipo de configuração global aqui como por exemplo o Firebase
     if (firebase.apps.length === 0) {
       firebase.initializeApp({
-        apiKey: "",
-        authDomain: "",
-        databaseURL: "",
-        projectId: "",
-        storageBucket: "",
-        messagingSenderId: ""
+        apiKey: "sua chave aqui",
+        authDomain: "seu domain aqui",
+        databaseURL: "sua ulr aqui",
+        projectId: "seu project id aqui",
+        storageBucket: "seu bucket aqui",
+        messagingSenderId: "seu id aqui"
       })
     }
   }
