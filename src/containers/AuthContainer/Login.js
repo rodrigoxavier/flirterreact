@@ -7,8 +7,9 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Alert, Image, Dimensions} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Alert, Image, Dimensions, TextInput} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import firebase from "firebase";
 
 var {height, width} = Dimensions.get('window');
 
@@ -19,8 +20,26 @@ export default class Login extends Component<Props> {
     super(props);
     this.state = {
       deviceWidth: width,
-      deviceHeight: height
+      deviceHeight: height,
+      email: "joao@joao.com",
+      senha: "semsenha"
     };
+  }
+
+  componentDidMount(){
+    //const currentUser = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        console.log("Current user ")
+        console.log(JSON.stringify(user))
+        if (user){//Se é diferente de null, se é true, se é diferente de vazio, se é diferente de undefind
+          Actions.dashboard();
+        }
+      } else {
+        // No user is signed in.
+      }
+    });
   }
 
   render() {
@@ -28,11 +47,47 @@ export default class Login extends Component<Props> {
       <View style={styles.container}>
         <Image style={styles.logoStyle} source={require('../../Images/logo.png')}/>
         <Text style={styles.titleText}>Flirter</Text>
+        <TextInput
+          style={styles.inputStyle}
+          onChangeText={(text) => this.setState({email: text})}
+          placeholder="Ex: fulano@gmail.com"
+          value={this.state.email}
+        />
+        <TextInput
+          style={styles.inputStyle}
+          onChangeText={(text) => this.setState({senha: text})}
+          placeholder="Senha aqui"
+          secureTextEntry
+          value={this.state.senha}
+        />
+        <TouchableOpacity onPress={()=> this.loginUser( this.state.email, this.state.senha)} style={styles.loginButton} >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={()=> this.openSignup()} style={styles.askButton} >
           <Text style={styles.buttonText}>Cadastro</Text>
-    </TouchableOpacity>
+        </TouchableOpacity>
       </View>
     );
+  }
+
+  loginUser(email, password){
+    //Alert.alert("Confirmar dados", "Verifique se os dados estão corretos.\nEmail: " + email + "\nSenha: "+ password);
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then ((dadosUsuario)=> {
+      //Alert.alert("Sucesso!");
+      Actions.dashboard();
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      if (error.code == "auth/user-not-found"){
+        Alert.alert("Atenção!", "Usuário não encontrado");
+      }
+      else {
+        Alert.alert("Atenção!", "Procure o dev e brigue com ele pq você não sabe sua senha.");
+      }
+      //Alert.alert("Errou!!", "Código: " + error.code + "\nMensagem: " + error.message);
+      // ...
+    });
   }
 
   textoCondicional(condicao){
@@ -100,6 +155,14 @@ const styles = StyleSheet.create({
     width: width * 0.8,
     alignItems: 'center'
   },
+  loginButton: {
+    backgroundColor: "#23541b",
+    borderRadius: 10,
+    padding: 10,
+    margin: 20,
+    width: width * 0.8,
+    alignItems: 'center'
+  },
   buttonText:{
     color: "white"
   },
@@ -131,5 +194,12 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
     alignItems: 'center'
-  }
+  },
+  inputStyle:{
+    height: height * 0.06, 
+    width: width * 0.85, 
+    borderBottomColor: 'gray', 
+    borderBottomWidth: 1,
+    margin: width * 0.04
+  },
 });

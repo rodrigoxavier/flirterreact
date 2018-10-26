@@ -105,12 +105,12 @@ export default class SignUp extends Component<Props> {
   askRegister(){
     Alert.alert(
       'Registrar',
-      'Confirma o seu registo?',
+      'Confirma o seu registo com os seguintes dados?\nNome: ' + this.state.nome + "\nEmail: " + this.state.email ,
       [
         {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'OK', onPress: () => 
-          this.confirmRegister()
-          //this.registerUser(this.state.email, this.state.senha, this.state.nome, this.state.cidade, this.state.telefone, this.state.idade)
+          //this.confirmRegister()
+          this.registerUser(this.state.email, this.state.senha, this.state.nome, this.state.cidade, this.state.telefone, this.state.idade)
         },
       ],
       { cancelable: false }

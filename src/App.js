@@ -23,12 +23,12 @@ class App extends Component {
     //Posso Fazer qualquer tipo de configuração global aqui como por exemplo o Firebase
     if (firebase.apps.length === 0) {
       firebase.initializeApp({
-        apiKey: "sua chave aqui",
-        authDomain: "seu domain aqui",
-        databaseURL: "sua ulr aqui",
-        projectId: "seu project id aqui",
-        storageBucket: "seu bucket aqui",
-        messagingSenderId: "seu id aqui"
+        apiKey: "AIzaSyDMQfC7QQArHtedDhUmQtaF-MHy5usQPjI",
+        authDomain: "aulareact-f3277.firebaseapp.com",
+        databaseURL: "https://aulareact-f3277.firebaseio.com",
+        projectId: "aulareact-f3277",
+        storageBucket: "aulareact-f3277.appspot.com",
+        messagingSenderId: "674457894840"
       })
     }
   }
