@@ -11,6 +11,7 @@ import Signup from './containers/AuthContainer/Signup'
 import Dashboard from './containers/MainContainer/Dashboard'
 import BarDetails from './containers/MainContainer/PlaceDetails'
 import TestContainer from './containers/AuthContainer/TestContainer'
+import UserProfile from './containers/AuthContainer/UserProfile';
 
 class RouterComponent extends Component {
   constructor (props) {
@@ -30,6 +31,9 @@ class RouterComponent extends Component {
               <Scene
                 key='signup'
                 component={Signup} />
+              <Scene
+                key='userProfile'
+                component={UserProfile} />
               <Scene
                   key='dashboard'
                   component={Dashboard} />

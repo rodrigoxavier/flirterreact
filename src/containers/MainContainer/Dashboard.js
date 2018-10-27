@@ -31,8 +31,15 @@ export default class Dashboard extends Component<Props> {
         <TouchableOpacity onPress={()=> this.logout()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=> this.goToEditProfile()} style={styles.loginButton} >
+          <Text style={styles.buttonText}>Editar Perfil</Text>
+        </TouchableOpacity>
       </View>
     );
+  }
+
+  goToEditProfile(){
+    Actions.userProfile();
   }
 
   logout(){
