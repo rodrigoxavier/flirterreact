@@ -24,19 +24,19 @@ export default class PlacesList extends Component<Props> {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.loadPlacesList();
     }
 
-    loadPlacesList(){
+    loadPlacesList() {
         firebase.database().ref("Places")
-        .once("value")
-        .then((snapshot)=>{
-            console.log("Recebi os locais!")
-            console.log(snapshot.val())
-            Alert.alert("Sucesso", "Lista de Locais retornado");
-            this.setState({placesData: snapshot.val()})
-        })
+            .once("value")
+            .then((snapshot) => {
+                console.log("Recebi os locais!")
+                console.log(snapshot.val())
+                Alert.alert("Sucesso", "Lista de Locais retornada");
+                this.setState({ placesData: snapshot.val() })
+            })
     }
 
 
@@ -44,6 +44,9 @@ export default class PlacesList extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
+                <TouchableOpacity onPress={() => Actions.login()} style={styles.loginButton} >
+                    <Text style={styles.buttonText}>Voltar para login</Text>
+                </TouchableOpacity>
                 <Text style={styles.welcome}>Listagem de Locais</Text>
             </View>
         );
