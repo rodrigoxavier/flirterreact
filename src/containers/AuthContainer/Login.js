@@ -63,11 +63,47 @@ export default class Login extends Component<Props> {
         <TouchableOpacity onPress={()=> this.loginUser( this.state.email, this.state.senha)} style={styles.loginButton} >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=> this.askForgotPassword()} style={styles.forgotButton} >
+          <Text style={styles.forgotText}>Esqueci minha senha</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={()=> this.openSignup()} style={styles.askButton} >
           <Text style={styles.buttonText}>Cadastro</Text>
         </TouchableOpacity>
       </View>
     );
+  }
+
+  askForgotPassword(){
+    if (this.state.email == ""){
+      Alert.alert("Erro", "Você precisa informar o seu e-mail");
+    }
+    else {
+      Alert.alert(
+        'Recuperar senha',
+        'Deseja realmente recuperar a senha do e-mail?\n' + this.state.email + '?',
+        [
+          {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => 
+            //this.confirmRegister()
+            this.resetPassword()
+          },
+        ],
+        { cancelable: false }
+      )
+    }
+  }
+
+  resetPassword(){
+    const email = this.state.email
+    firebase.auth().sendPasswordResetEmail(email)
+      .then(() => {
+        Alert.alert('Sucesso', "Um e-mail de recuperação de senha foi enviado para: "+email);
+      })
+      .catch((error) => this.resetPasswordFail(error))
+  }
+
+  resetPasswordFail(error){
+    console.log("Erro ao recuperar senha: "+error)
   }
 
   loginUser(email, password){
@@ -163,8 +199,20 @@ const styles = StyleSheet.create({
     width: width * 0.8,
     alignItems: 'center'
   },
+  forgotButton: {
+    backgroundColor: "transparent",
+    borderRadius: 10,
+    padding: 10,
+    margin: 20,
+    width: width * 0.8,
+    alignItems: 'center'
+  },
   buttonText:{
     color: "white"
+  },
+  forgotText:{
+    color: "blue",
+    textDecorationLine: "underline"
   },
   welcomeText: {
     color: "gray",
