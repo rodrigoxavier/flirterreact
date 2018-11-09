@@ -37,6 +37,9 @@ export default class Dashboard extends Component<Props> {
         <TouchableOpacity onPress={()=> this.goToNewPlace()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Novo Local</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=> this.gotToPlacesList()} style={styles.loginButton} >
+          <Text style={styles.buttonText}>Lista de Locais</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -47,6 +50,10 @@ export default class Dashboard extends Component<Props> {
 
   goToNewPlace(){
     Actions.newPlace();
+  }
+
+  gotToPlacesList(){
+    Actions.placesList();
   }
 
   logout(){
