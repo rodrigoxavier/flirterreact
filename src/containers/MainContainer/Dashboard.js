@@ -34,12 +34,19 @@ export default class Dashboard extends Component<Props> {
         <TouchableOpacity onPress={()=> this.goToEditProfile()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Editar Perfil</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=> this.goToNewPlace()} style={styles.loginButton} >
+          <Text style={styles.buttonText}>Novo Local</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
   goToEditProfile(){
     Actions.userProfile();
+  }
+
+  goToNewPlace(){
+    Actions.newPlace();
   }
 
   logout(){
