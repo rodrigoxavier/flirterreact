@@ -34,7 +34,10 @@ export default class Dashboard extends Component<Props> {
         <TouchableOpacity onPress={()=> this.goToEditProfile()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Editar Perfil</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this.goToNewPlace()} style={styles.loginButton} >
+        {/*<TouchableOpacity onPress={()=> this.goToNewPlace()} style={styles.loginButton} >
+          <Text style={styles.buttonText}>Novo Local</Text>
+    </TouchableOpacity>*/}
+        <TouchableOpacity onPress={()=> this.goToCreatePlace()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Novo Local</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> this.gotToPlacesList()} style={styles.loginButton} >
@@ -48,9 +51,13 @@ export default class Dashboard extends Component<Props> {
     Actions.userProfile();
   }
 
-  goToNewPlace(){
-    Actions.newPlace();
+  goToCreatePlace(){
+    Actions.createPlace();
   }
+
+  /*goToNewPlace(){
+    Actions.newPlace();
+  }*/
 
   gotToPlacesList(){
     Actions.placesList();

@@ -14,6 +14,7 @@ import TestContainer from './containers/AuthContainer/TestContainer'
 import UserProfile from './containers/AuthContainer/UserProfile';
 import NewPlace from './containers/MainContainer/NewPlace';
 import PlacesList from './containers/MainContainer/PlacesList';
+import CreatePlace from './containers/MainContainer/CreatePlace';
 
 class RouterComponent extends Component {
   constructor (props) {
@@ -51,6 +52,9 @@ class RouterComponent extends Component {
               <Scene
                 key='testContainer'
                 component={TestContainer} />
+              <Scene
+                key='createPlace'
+                component={CreatePlace} />
             </Scene>
           </Scene>
         </Router>
