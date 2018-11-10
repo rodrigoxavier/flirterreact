@@ -40,7 +40,7 @@ export default class Dashboard extends Component<Props> {
         <TouchableOpacity onPress={()=> this.goToCreatePlace()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Novo Local</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this.gotToPlacesList()} style={styles.loginButton} >
+        <TouchableOpacity onPress={()=> this.goToPlaceList()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Lista de Locais</Text>
         </TouchableOpacity>
       </View>
@@ -55,13 +55,13 @@ export default class Dashboard extends Component<Props> {
     Actions.createPlace();
   }
 
+  goToPlaceList(){
+    Actions.placeList();
+  }
+
   /*goToNewPlace(){
     Actions.newPlace();
   }*/
-
-  gotToPlacesList(){
-    Actions.placesList();
-  }
 
   logout(){
     firebase.auth().signOut()

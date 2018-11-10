@@ -13,8 +13,9 @@ import BarDetails from './containers/MainContainer/PlaceDetails'
 import TestContainer from './containers/AuthContainer/TestContainer'
 import UserProfile from './containers/AuthContainer/UserProfile';
 import NewPlace from './containers/MainContainer/NewPlace';
-import PlacesList from './containers/MainContainer/PlacesList';
 import CreatePlace from './containers/MainContainer/CreatePlace';
+import PlaceDetails from './containers/MainContainer/PlaceDetails';
+import PlaceList from './containers/MainContainer/PlaceList';
 
 class RouterComponent extends Component {
   constructor (props) {
@@ -47,14 +48,14 @@ class RouterComponent extends Component {
                 key='newPlace'
                 component={NewPlace} />
               <Scene
-                key='placesList'
-                component={PlacesList} />
-              <Scene
                 key='testContainer'
                 component={TestContainer} />
               <Scene
                 key='createPlace'
                 component={CreatePlace} />
+              <Scene
+                key='placeList'
+                component={PlaceList} />
             </Scene>
           </Scene>
         </Router>
