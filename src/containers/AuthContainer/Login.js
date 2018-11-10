@@ -84,26 +84,22 @@ export default class Login extends Component<Props> {
         [
           {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
           {text: 'OK', onPress: () => 
-            //this.confirmRegister()
-            this.resetPassword()
+            this.resetPassword() 
+
           },
         ],
+
         { cancelable: false }
       )
     }
   }
 
   resetPassword(){
-    const email = this.state.email
-    firebase.auth().sendPasswordResetEmail(email)
-      .then(() => {
-        Alert.alert('Sucesso', "Um e-mail de recuperação de senha foi enviado para: "+email);
-      })
-      .catch((error) => this.resetPasswordFail(error))
-  }
-
-  resetPasswordFail(error){
-    console.log("Erro ao recuperar senha: "+error)
+    var auth = firebase.auth();
+    var emailAddress = this.state.email;
+    auth.sendPasswordResetEmail(emailAddress).then(function(){
+      Alert.alert("Sucesso!!","email de recuperacao enviado")
+    })
   }
 
   loginUser(email, password){
