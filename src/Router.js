@@ -9,13 +9,14 @@ import { Scene, Router } from 'react-native-router-flux';
 import Login from './containers/AuthContainer/Login'
 import Signup from './containers/AuthContainer/Signup'
 import Dashboard from './containers/MainContainer/Dashboard'
-import BarDetails from './containers/MainContainer/PlaceDetails'
 import TestContainer from './containers/AuthContainer/TestContainer'
 import UserProfile from './containers/AuthContainer/UserProfile';
 import NewPlace from './containers/MainContainer/NewPlace';
 import CreatePlace from './containers/MainContainer/CreatePlace';
 import PlaceDetails from './containers/MainContainer/PlaceDetails';
 import PlaceList from './containers/MainContainer/PlaceList';
+import ClassPlaces from './containers/MainContainer/ClassPlaces';
+import PlaceClassDetails from './containers/MainContainer/PlaceClassDetails';
 
 class RouterComponent extends Component {
   constructor (props) {
@@ -42,8 +43,8 @@ class RouterComponent extends Component {
                   key='dashboard'
                   component={Dashboard} />
               <Scene
-                key='barDetails'
-                component={BarDetails} />
+                key='placeDetails'
+                component={PlaceDetails} />
               <Scene
                 key='newPlace'
                 component={NewPlace} />
@@ -56,6 +57,12 @@ class RouterComponent extends Component {
               <Scene
                 key='placeList'
                 component={PlaceList} />
+              <Scene
+                key='classPlaces'
+                component={ClassPlaces} />
+              <Scene
+                key='placeClassDetails'
+                component={PlaceClassDetails} />
             </Scene>
           </Scene>
         </Router>

@@ -7,9 +7,10 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Dimensions} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Dimensions, FlatList} from 'react-native';
 import { ActionConst, Actions } from 'react-native-router-flux';
 import firebase from "firebase"
+import _ from "lodash"
 
 var {height, width} = Dimensions.get('window');
 
@@ -23,6 +24,14 @@ const instructions = Platform.select({
 type Props = {};
 export default class PlaceList extends Component<Props> {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+        deviceWidth: width,
+        deviceHeight: height,
+        placesData: []
+    };
+  }
 
   componentDidMount(){
     this.searchPlaces();
@@ -30,22 +39,11 @@ export default class PlaceList extends Component<Props> {
 
   searchPlaces(){
     firebase.database().ref("Places")
-    .orderByChild("cidade")
-    .equalTo("Belo Horizonte")
     .once("value")
     .then((snapshot)=>{
-      console.log("Meus locais")
-      console.log(snapshot.val())
+      const placesMaped = _.values(snapshot.val());
+      this.setState({placesData: placesMaped})
     })
-
-
-    /*firebase.database().ref("Users")
-            .orderByChild("uid")
-            .equalTo(user.uid)
-            .once("value")
-            .then((snapshot)=>{
-                this.setState({userData: snapshot.val()[user.uid]})
-            })*/
   }
 
   render() {
@@ -55,8 +53,26 @@ export default class PlaceList extends Component<Props> {
         <TouchableOpacity onPress={()=> this.goToDashboard()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Voltar para Dashboard</Text>
         </TouchableOpacity>
+        <FlatList
+          data={this.state.placesData}
+          renderItem={({item})  => this.renderPlace(item)}
+        />
       </View>
     );
+  }
+
+  renderPlace(item){
+    return (
+      <TouchableOpacity style={styles.rowView} onPress={()=>{this.openDetails(item)}}>
+        <Text>{item.nome} - </Text>
+        <Text>{item.cidade}</Text>
+      </TouchableOpacity>
+      
+    )
+  }
+
+  openDetails(place){
+    Actions.placeDetails({place: place})
   }
 
   goToDashboard(){
@@ -96,5 +112,9 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: "bold",
     fontSize: width * 0.05
+  },
+  rowView:{
+    flex: 1,
+    flexDirection: "row"
   }
 });
