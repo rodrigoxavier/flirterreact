@@ -37,6 +37,10 @@ export default class PlaceList extends Component<Props> {
     this.searchPlaces();
   }
 
+  componentDidUpdate(){
+    this.searchPlaces();
+  }
+
   searchPlaces(){
     firebase.database().ref("Places")
     .once("value")
