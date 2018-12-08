@@ -46,8 +46,15 @@ export default class Dashboard extends Component<Props> {
         <TouchableOpacity onPress={()=> this.goToClassPlaces()} style={styles.loginButton} >
           <Text style={styles.buttonText}>Locais da Turma</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=> this.goToTabs()} style={styles.loginButton} >
+          <Text style={styles.buttonText}>Tabs</Text>
+        </TouchableOpacity>
       </View>
     );
+  }
+
+  goToTabs(){
+      Actions.tabs();
   }
 
   goToClassPlaces(){
