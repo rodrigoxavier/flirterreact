@@ -22,7 +22,9 @@ export default class ClassPlaces extends Component<Props> {
         this.state = {
             deviceWidth: width,
             deviceHeight: height,
-            placesData: []
+            placesData: [],
+            placeDataBkp: [],
+            searchText: ""
         }
     }
 
@@ -35,7 +37,10 @@ export default class ClassPlaces extends Component<Props> {
         .once("value")
         .then((snapshot)=>{
             const placesValues = _.values(snapshot.val());
-            this.setState({placesData : placesValues});
+            this.setState({
+                placesData : placesValues,
+                placeDataBkp: placesValues
+            });
         })
     }
 
@@ -46,6 +51,7 @@ export default class ClassPlaces extends Component<Props> {
                     <Text style={styles.buttonText}>Voltar</Text>
                 </TouchableOpacity>
                 <Text style={styles.titleText}>Lista de Locais</Text>
+                <TextInput onChangeText={(text)=>{this.textChanged(text)}} placeholder="Pesquise aqui..." value={this.state.searchText}></TextInput>
                 <FlatList
                     data={this.state.placesData}
                     renderItem={({item}) => this.renderPlace(item)}/>
@@ -53,11 +59,25 @@ export default class ClassPlaces extends Component<Props> {
         );
     }
 
+    textChanged(text){
+        console.log(text)
+        this.setState({
+            searchText: text
+        });
+        
+        const newValues = _.filter(this.state.placeDataBkp, (place)=>{
+            const placeName = place.nome ? place.nome : "";
+            return placeName.toLowerCase().indexOf(text.toLowerCase()) > -1
+        })
+
+        this.setState({placesData: newValues});
+    }
+
     renderPlace(item){
         return (
             <TouchableOpacity onPress={() => this.openPlaceDetail(item)} style={styles.rowView} >
-                <Text>{item.nome} - </Text>
-                <Text>{item.cidade}</Text>
+                <Text style={styles.placeName}>{item.nome} - </Text>
+                <Text style={styles.placeName}>{item.cidade}</Text>
             </TouchableOpacity>
         )
     }
@@ -124,5 +144,9 @@ const styles = StyleSheet.create({
     rowView:{
         flex: 1,
         flexDirection: 'row'
+    },
+    placeName: {
+        fontSize: 18,
+        color: 'black'
     }
 });
